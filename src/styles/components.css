@@ -351,8 +351,8 @@ textarea.input-error {
   margin-top: 0.25rem;
 }
 
-/* DONATION PAGE */
-.donation-grid {
+/* OFFERING PAGE */
+.offering-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
@@ -642,7 +642,7 @@ textarea.input-error {
 }
 
 @media (max-width: 768px) {
-  .hero-grid, .founder-grid, .donation-grid, .footer-grid {
+  .hero-grid, .founder-grid, .offering-grid, .footer-grid {
     grid-template-columns: 1fr;
   }
   .form-group-grid { grid-template-columns: 1fr; }
