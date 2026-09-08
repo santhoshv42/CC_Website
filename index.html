@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calvary Church | Jesus Mission Ministries | Prophet Michael Manju</title>
+  <meta name="description" content="Welcome to Calvary Church, Jesus Mission Ministries - Founded by Prophet Michael Manju. Join our anointed worship services, prayer meetings, and submit your prayer requests.">
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <link rel="stylesheet" href="./src/styles/components.css">
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+  <!-- DYNAMIC RUNNING VERSE BANNER (Top Ticker) -->
+  <div class="verse-ticker-bar" id="tickerBar">
+    <div class="container ticker-container">
+      <div class="ticker-label">
+        <span>✨ VERSE OF THE DAY</span>
+      </div>
+      <div class="ticker-scroll-window">
+        <div class="ticker-content-track" id="tickerTrack">
+          <span class="verse-text-span" id="tickerText">Loading Today's Daily Scripture...</span>
+          <span class="verse-ref-span" id="tickerRef"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="navbar-header">
+    <div class="container navbar-container">
+      <a href="#home" class="brand-logo nav-trigger" data-view="home-view">
+        <div class="brand-icon-emblem">✝</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">CALVARY CHURCH</span>
+          <span class="brand-subtitle">Jesus Mission Ministries</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active nav-trigger" data-view="home-view">Home</a></li>
+        <li><a href="#about" class="nav-link nav-trigger" data-view="about-view">About Prophet</a></li>
+        <li><a href="#events" class="nav-link nav-trigger" data-view="events-view">Events & Services</a></li>
+        <li><a href="#testimonies" class="nav-link nav-trigger" data-view="testimonies-view">Testimonies</a></li>
+      </ul>
+
+      <div class="header-actions" style="display: flex; gap: 0.8rem; align-items: center;">
+        <a href="#donation" class="btn-primary nav-trigger" data-view="donation-view">
+          <span>🎁 Send Offering</span>
+        </a>
+        <a href="#prayer" class="btn-primary nav-trigger" data-view="prayer-view">
+          <span>🙏 Send Prayer Request</span>
+        </a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- VIEW 1: HOME LANDING PAGE -->
+    <div id="home-view" class="page-view active-view">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-text-col">
+            <span class="section-tag">Welcome to Calvary Church</span>
+            <h1>Experiencing the Living God & Prophetic Word</h1>
+            <p class="hero-subtitle">
+              Based in Bangalore, Jesus Mission Ministries is dedicated to releasing the uncompromised Gospel, prophetic revelation, divine healing, and deliverance under the leadership of <strong>Prophet Michael Manju</strong> as the Lord provides the way.
+            </p>
+            <div class="hero-cta-group">
+              <a href="#events" class="btn-primary nav-trigger" data-view="events-view">
+                <span>🗓 Service Timings</span>
+              </a>
+              <a href="#prayer" class="btn-secondary nav-trigger" data-view="prayer-view">
+                <span>Request Prayer</span>
+              </a>
+            </div>
+          </div>
+          <div class="hero-image-col">
+            <div class="hero-image-card">
+              <img src="./public/assets/church_hero.png" alt="Calvary Church" id="heroMainImg">
+              <div class="hero-overlay-badge">
+                <div class="hero-badge-title">Calvary Church</div>
+                <div class="hero-badge-sub">Join us in person every Sunday for revival & miraculous worship</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Church Timings & Service Days Card -->
+      <section class="timings-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-tag">Worship & Gathering</span>
+            <h2>Church Service Days & Timings</h2>
+            <p>Join our spirit-filled services in person or connect with us online.</p>
+          </div>
+
+          <div class="timings-grid" id="homeTimingsGrid">
+            <!-- Populated via JS / events.json -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Founder Highlight Section -->
+      <section class="founder-section">
+        <div class="container founder-grid">
+          <div class="founder-photo-box">
+            <img src="./public/assets/prophet_michael_manju.jpg" alt="Prophet Michael Manju - Founder" id="founderHomeImg">
+          </div>
+          <div class="founder-info-col">
+            <span class="section-tag">Meet Prophet Michael</span>
+            <h2>Prophet Michael Manju</h2>
+            <div class="founder-role">Founder & Senior Pastor — Jesus Mission Ministries</div>
+            <p style="margin-top: 1rem;">
+              Prophet Michael Manju is a called servant of God with a profound prophetic grace, commissioned to impact nations through Jesus Mission Ministries. With over two decades of dedicated ministry, he has witnessed countless miracles of healing, salvation, and spiritual restoration.
+            </p>
+            <div class="founder-quote-box">
+              "Our mission is to bring the transformative power of Jesus Christ into every home, broken heart, and burden."
+            </div>
+            <div style="margin-top: 1.8rem;">
+              <a href="#about" class="btn-secondary nav-trigger" data-view="about-view">
+                Read Full Biography & Church History →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Testimonies Banner -->
+      <section style="background: var(--bg-surface);">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-tag">God's Faithfulness</span>
+            <h2>Recent Testimonies of Healing & Victory</h2>
+            <p>Read inspiring stories of how God is changing lives at Calvary Church.</p>
+          </div>
+          <div class="testimonies-grid" id="homeTestimoniesPreview">
+            <!-- Populated via JS -->
+          </div>
+          <div class="text-center" style="margin-top: 2.5rem;">
+            <a href="#testimonies" class="btn-primary nav-trigger" data-view="testimonies-view">
+              View All Testimonies & Submit Yours
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Giving CTA Banner -->
+      <section style="background: linear-gradient(135deg, #1E293B, #2D3748); color: #FFF;">
+        <div class="container text-center" style="max-width: 800px;">
+          <span class="section-tag" style="background: rgba(197,160,89,0.2); color: #D4AF37; border-color: #D4AF37;">Kingdom Support</span>
+          <h2 style="color: #FFF; margin: 1rem 0;">Partner with Jesus Mission Ministries</h2>
+          <p style="color: #CBD5E1; margin-bottom: 2rem;">
+            Your generous tithes and offerings help expand God's kingdom, support community outreach, and broadcast the Gospel message.
+          </p>
+          <a href="#donation" class="btn-primary nav-trigger" data-view="donation-view">
+            <span>💛 Support & Give Now</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: ABOUT PROPHET MICHAEL MANJU & CHURCH -->
+    <div id="about-view" class="page-view">
+      <section class="hero-section">
+        <div class="container text-center" style="max-width: 850px;">
+          <span class="section-tag">About Us</span>
+          <h1>Prophet Michael Manju & Calvary Church</h1>
+          <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">
+            Discover the heart, vision, and divine journey of Jesus Mission Ministries.
+          </p>
+        </div>
+      </section>
+
+      <section style="background: var(--bg-surface);">
+        <div class="container founder-grid">
+          <div class="founder-photo-box">
+            <img src="./public/assets/prophet_michael_manju.jpg" alt="Prophet Michael Manju Portrait">
+          </div>
+          <div>
+            <span class="section-tag">Prophetic Ministry</span>
+            <h2>Prophet Michael Manju</h2>
+            <div class="founder-role">Founder & President of Jesus Mission Ministries (Bangalore)</div>
+            <p style="margin-top: 1rem; line-height: 1.8;">
+              Prophet Michael Manju was called into full-time ministry with a clear commission: to awaken believers to their spiritual inheritance, release the living Prophetic Word, minister divine healing, and establish vibrant worship communities under Calvary Church.
+            </p>
+            <p style="margin-top: 1rem; line-height: 1.8;">
+              Currently based in <strong>Bangalore</strong>, the ministry actively attends, hosts, and ministers at meetings, crusade gatherings, and prayer conventions as the Lord opens doors and provides the way.
+            </p>
+            <p style="margin-top: 1rem; line-height: 1.8;">
+              Known for an accurate prophetic unction and divine revelation, Prophet Michael Manju releases timely prophetic words, personal spiritual direction, and God’s wisdom that bring breakthrough, break bondages, and align believers with their heavenly calling.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section style="background: var(--bg-primary);">
+        <div class="container" style="max-width: 900px;">
+          <div class="section-header text-center">
+            <span class="section-tag">Pillars of Faith</span>
+            <h2>Our Vision & Mission</h2>
+          </div>
+          <div class="timings-grid">
+            <div class="timing-card">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 0.8rem;">📖 Prophetic Word & Truth</h3>
+              <p>Preaching the eternal, life-changing Word of God with prophetic revelation, power, and divine wisdom.</p>
+            </div>
+            <div class="timing-card">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 0.8rem;">🔥 Healing & Deliverance</h3>
+              <p>Facilitating an atmosphere for the Holy Spirit to break yokes, minister divine healing, and restore souls.</p>
+            </div>
+            <div class="timing-card">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 0.8rem;">📍 Bangalore Base & Outreach</h3>
+              <p>Based in Bangalore, attending meetings, crusade revivals, and prayer networks as the Lord provides the way.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 3: EVENTS & SERVICE DAYS -->
+    <div id="events-view" class="page-view">
+      <section class="hero-section">
+        <div class="container text-center" style="max-width: 800px;">
+          <span class="section-tag">Gatherings & Events</span>
+          <h1>Church Service Days & Upcoming Crusades</h1>
+          <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">
+            We welcome you to worship with us! Find our weekly service timings and special crusade details below.
+          </p>
+        </div>
+      </section>
+
+      <section style="background: var(--bg-surface);">
+        <div class="container">
+          <div id="eventsFullList" class="timings-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 4: TESTIMONIES PAGE -->
+    <div id="testimonies-view" class="page-view">
+      <section class="hero-section">
+        <div class="container text-center" style="max-width: 800px;">
+          <span class="section-tag">Praise & Thanksgiving</span>
+          <h1>Testimonies of Miracles & Grace</h1>
+          <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">
+            "They overcame him by the blood of the Lamb and by the word of their testimony." — Revelation 12:11
+          </p>
+          <button class="btn-primary" id="openTestimonyModalBtn">
+            ✍️ Share Your Testimony
+          </button>
+        </div>
+      </section>
+
+      <section style="background: var(--bg-surface);">
+        <div class="container">
+          <div class="testimonies-grid" id="fullTestimoniesGrid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 5: DONATION PAGE (Static Bank Details & QR) -->
+    <div id="donation-view" class="page-view">
+      <section class="hero-section">
+        <div class="container text-center" style="max-width: 800px;">
+          <span class="section-tag">Kingdom Giving</span>
+          <h1>Support Calvary Church & Jesus Mission</h1>
+          <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">
+            Thank you for honoring the Lord with your financial support. Below are our bank details and official scan QR code.
+          </p>
+        </div>
+      </section>
+
+      <section style="background: var(--bg-surface);">
+        <div class="container">
+          <div class="donation-grid">
+            <!-- QR Code Card -->
+            <div class="qr-card">
+              <span class="section-tag">Scan & Pay</span>
+              <h3 style="font-family: var(--font-heading); margin: 0.8rem 0;">UPI / Mobile Scanner</h3>
+              <p style="font-size: 0.9rem; color: var(--slate-medium);">Scan using GPay, PhonePe, Paytm, or any BHIM UPI App</p>
+              <div class="qr-image-wrap">
+                <img src="./public/assets/donation_qr.png" alt="Donation QR Code Placeholder">
+              </div>
+              <div style="font-weight: 700; font-size: 1.1rem; color: var(--slate-dark);">
+                UPI ID: <span id="upiIdVal" style="color: var(--gold-primary);">calvarychurch@upi</span>
+                <button class="btn-copy" data-copy="calvarychurch@upi">Copy UPI</button>
+              </div>
+            </div>
+
+            <!-- Direct Bank Details Card -->
+            <div class="bank-details-box">
+              <span class="section-tag">Direct Bank Transfer</span>
+              <h3 style="font-family: var(--font-heading); margin: 0.8rem 0 1.5rem;">Account Details</h3>
+
+              <div class="bank-row">
+                <span class="bank-label">Account Name</span>
+                <span class="bank-val">
+                  <span>JESUS MISSION MINISTRIES</span>
+                  <button class="btn-copy" data-copy="JESUS MISSION MINISTRIES">Copy</button>
+                </span>
+              </div>
+
+              <div class="bank-row">
+                <span class="bank-label">Bank Name</span>
+                <span class="bank-val">State Bank of India</span>
+              </div>
+
+              <div class="bank-row">
+                <span class="bank-label">Account Number</span>
+                <span class="bank-val">
+                  <span id="bankAccNo">409823901842</span>
+                  <button class="btn-copy" data-copy="409823901842">Copy</button>
+                </span>
+              </div>
+
+              <div class="bank-row">
+                <span class="bank-label">IFSC Code</span>
+                <span class="bank-val">
+                  <span id="bankIfsc">SBIN0001420</span>
+                  <button class="btn-copy" data-copy="SBIN0001420">Copy</button>
+                </span>
+              </div>
+
+              <div class="bank-row">
+                <span class="bank-label">Branch</span>
+                <span class="bank-val">Main City Branch</span>
+              </div>
+
+              <div style="margin-top: 1.8rem; padding: 1rem; background: var(--bg-accent-light); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--slate-medium);">
+                💡 <em>Note: Online payment gateway integrations (Credit/Debit Card, Netbanking) will be connected directly to these accounts.</em>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 6: PRAYER REQUEST PAGE -->
+    <div id="prayer-view" class="page-view">
+      <section class="hero-section">
+        <div class="container text-center" style="max-width: 800px;">
+          <span class="section-tag">Intercession Ministry</span>
+          <h1>Send Your Prayer Request</h1>
+          <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">
+            Prophet Michael Manju and our intercessory prayer team stand ready to pray for your needs in Jesus' name.
+          </p>
+        </div>
+      </section>
+
+      <section style="background: var(--bg-surface);">
+        <div class="container">
+          <div class="prayer-card-container">
+            <form id="prayerForm" novalidate>
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label for="fullName">Your Full Name *</label>
+                  <input type="text" id="fullName" placeholder="e.g. John Emmanuel" required>
+                  <span class="form-error-msg" id="nameError" style="display:none;"></span>
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">Email Address *</label>
+                  <input type="email" id="contactEmail" placeholder="e.g. email@example.com" required>
+                  <span class="form-error-msg" id="emailError" style="display:none;"></span>
+                  <span class="form-hint">So we can reach out to you with encouragement</span>
+                </div>
+              </div>
+
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label for="contactPhone">Phone / WhatsApp Number *</label>
+                  <input type="tel" id="contactPhone" placeholder="e.g. 9876543210" maxlength="10" pattern="[0-9]{10}" required>
+                  <span class="form-error-msg" id="phoneError" style="display:none;"></span>
+                </div>
+                <div class="form-group">
+                  <label for="prayerCategory">Prayer Category</label>
+                  <select id="prayerCategory">
+                    <option value="Healing & Health">Healing & Health</option>
+                    <option value="Family & Marriage">Family & Marriage</option>
+                    <option value="Financial & Job">Financial & Job Breakthrough</option>
+                    <option value="Spiritual Growth">Spiritual Growth & Deliverance</option>
+                    <option value="Children & Studies">Children & Education</option>
+                    <option value="Other">Other Request</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="prayerMessage">Your Prayer Request Details *</label>
+                <textarea id="prayerMessage" rows="5" placeholder="Share your prayer need, health situation, or family issue here..." required></textarea>
+                <span class="form-error-msg" id="messageError" style="display:none;"></span>
+              </div>
+
+              <div style="margin-bottom: 1.5rem;">
+                <label style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" id="confidentialCheck" checked>
+                  <span style="font-size: 0.9rem; color: var(--slate-medium);">Keep my prayer request strictly confidential with Prophet Michael Manju & Prayer Team</span>
+                </label>
+              </div>
+
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 0.9rem;">
+                🙏 Submit Prayer Request
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- MODALS -->
+
+  <!-- Submit Testimony Modal -->
+  <div class="modal-overlay" id="testimonyModal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="closeTestimonyModal">&times;</button>
+      <span class="section-tag">Testimony Form</span>
+      <h3 style="font-family: var(--font-heading); margin: 0.5rem 0 1.2rem;">Share How God Blessed You</h3>
+      <form id="testimonyForm">
+        <div class="form-group">
+          <label for="testifierName">Your Name</label>
+          <input type="text" id="testifierName" placeholder="e.g. Sister Grace" required>
+        </div>
+        <div class="form-group">
+          <label for="testifierCity">City / Location</label>
+          <input type="text" id="testifierCity" placeholder="e.g. Chennai" required>
+        </div>
+        <div class="form-group">
+          <label for="testimonyHeadline">Testimony Title</label>
+          <input type="text" id="testimonyHeadline" placeholder="e.g. Miraculous Healing from Surgery" required>
+        </div>
+        <div class="form-group">
+          <label for="testimonyDetail">Your Story</label>
+          <textarea id="testimonyDetail" rows="4" placeholder="Describe what God did..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Submit Testimony</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Prayer Submission Success Modal -->
+  <div class="modal-overlay" id="prayerSuccessModal">
+    <div class="modal-content text-center">
+      <button class="modal-close-btn" id="closePrayerSuccessModal">&times;</button>
+      <div style="font-size: 3.5rem; color: var(--gold-primary); margin-bottom: 1rem;">🙌</div>
+      <h2 style="font-family: var(--font-heading); color: var(--slate-dark);">Prayer Request Received!</h2>
+      <p style="margin: 1rem 0 1.5rem; color: var(--slate-medium);">
+        Thank you for submitting your prayer request. Prophet Michael Manju and our intercessory prayer team have received your details and will stand in prayer for you.
+      </p>
+      <button class="btn-primary" id="btnDonePrayerModal" style="margin: 0 auto;">Amen & Return to Home</button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notification" id="toast">
+    <span id="toastIcon">✨</span>
+    <span id="toastMessage">Copied to clipboard!</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="font-family: var(--font-heading); font-size: 1.4rem; color: #FFF; font-weight: 800; margin-bottom: 0.8rem;">
+            CALVARY CHURCH
+          </div>
+          <div style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">
+            Jesus Mission Ministries
+          </div>
+          <p style="font-size: 0.9rem; color: #94A3B8;">
+            Founded by <strong>Prophet Michael Manju</strong>. Dedicated to spreading God's kingdom, healing, and prophetic ministry to all nations.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home" class="nav-trigger" data-view="home-view">Home</a></li>
+            <li><a href="#about" class="nav-trigger" data-view="about-view">About Prophet Michael Manju</a></li>
+            <li><a href="#events" class="nav-trigger" data-view="events-view">Service Timings</a></li>
+            <li><a href="#testimonies" class="nav-trigger" data-view="testimonies-view">Testimonies</a></li>
+            <li><a href="#donation" class="nav-trigger" data-view="donation-view">Give & Donate</a></li>
+            <li><a href="#prayer" class="nav-trigger" data-view="prayer-view">Send Prayer Request</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Service Days</h4>
+          <ul class="footer-links">
+            <li>Sun Tamil Service: 8:00 AM</li>
+            <li>Sun Kannada Service: 10:30 AM</li>
+            <li>Wed Prayer: 6:30 PM onwards</li>
+            <li>2nd Sat Fasting Meeting: 10:30 AM</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact & Location</h4>
+          <p style="font-size: 0.9rem; color: #94A3B8; margin-bottom: 0.5rem; line-height: 1.4;">📍 Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore</p>
+          <p style="font-size: 0.9rem; color: #94A3B8; margin-bottom: 0.5rem;">📞 +91 98765 43210</p>
+          <p style="font-size: 0.9rem; color: #94A3B8;">✉️ info@jesusmissionministries.org</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Calvary Church - Jesus Mission Ministries. All Rights Reserved.</div>
+        <div>Ready for deployment to Hostinger hosting.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>

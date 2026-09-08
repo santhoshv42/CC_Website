@@ -1,0 +1,362 @@
+/* Modern Light-Toned Design System for Calvary Church - Jesus Mission Ministries */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette - Light & Divine Warm Aesthetics */
+  --bg-primary: #FAF9F6;       /* Warm Alabaster White */
+  --bg-surface: #FFFFFF;       /* Pure White Card Surface */
+  --bg-subtle: #F3EFE6;        /* Soft Cream Warm Tint */
+  --bg-card: #FFFFFF;
+  --bg-accent-light: #FFFBF2;  /* Softest Gold Highlight */
+  
+  /* Primary Accent - Regal Divine Gold & Slate */
+  --gold-primary: #C5A059;     /* Graceful Divine Gold */
+  --gold-hover: #B08A42;
+  --gold-light: #E8D8B5;
+  --gold-glow: rgba(197, 160, 89, 0.25);
+  
+  --slate-dark: #1E293B;      /* Deep Slate Navy (High Contrast Text) */
+  --slate-medium: #475569;    /* Medium Muted Text */
+  --slate-light: #64748B;     /* Light Caption Text */
+  
+  --border-light: #E5E0D4;
+  --border-accent: #D4AF37;
+  
+  --shadow-sm: 0 2px 8px rgba(30, 41, 59, 0.04);
+  --shadow-md: 0 10px 30px rgba(197, 160, 89, 0.08), 0 4px 12px rgba(30, 41, 59, 0.03);
+  --shadow-lg: 0 20px 40px rgba(30, 41, 59, 0.08), 0 8px 24px rgba(197, 160, 89, 0.12);
+
+  /* Fonts */
+  --font-heading: 'Cinzel', serif, Georgia;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Transitions & Radii */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--slate-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  color: var(--slate-dark);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.25; }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); }
+p { color: var(--slate-medium); font-size: 1.05rem; }
+
+.gold-text {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #AA771C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-center { text-align: center; }
+.container {
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Dynamic Verse Marquee Banner (Top Header) */
+.verse-ticker-bar {
+  background: linear-gradient(90deg, #1E293B 0%, #2D3748 50%, #1E293B 100%);
+  color: #FFF;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 2px solid var(--gold-primary);
+  font-size: 0.92rem;
+  z-index: 100;
+}
+
+.ticker-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ticker-label {
+  background: linear-gradient(135deg, var(--gold-primary), #B08A42);
+  color: #FFF;
+  font-weight: 700;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.ticker-scroll-window {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+}
+
+.ticker-content-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+  padding-left: 100%;
+}
+
+.ticker-content-track:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+.verse-text-span {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: #F8FAFC;
+}
+
+.verse-ref-span {
+  font-family: var(--font-heading);
+  color: var(--gold-light);
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* Header & Navbar */
+.navbar-header {
+  position: sticky;
+  top: 0;
+  background: rgba(250, 249, 246, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  z-index: 90;
+  transition: var(--transition);
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+}
+
+.brand-icon-emblem {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, var(--gold-primary), #9A7730);
+  color: #FFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px var(--gold-glow);
+}
+
+.brand-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--slate-dark);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.brand-subtitle {
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--slate-dark);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.2rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--gold-primary);
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--gold-primary);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold-primary) 0%, #B08A42 100%);
+  color: #FFFFFF !important;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px var(--gold-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
+  background: linear-gradient(135deg, #B08A42 0%, #94712F 100%);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--slate-dark);
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  background: var(--bg-accent-light);
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--slate-dark);
+  cursor: pointer;
+}
+
+/* Sections Global */
+section {
+  padding: 5rem 0;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  background: var(--bg-accent-light);
+  color: var(--gold-primary);
+  border: 1px solid var(--gold-light);
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+.section-header {
+  margin-bottom: 3.5rem;
+}
+
+/* Mobile responsive drawer */
+@media (max-width: 900px) {
+  .mobile-toggle { display: block; }
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 80px);
+    background: var(--bg-surface);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    transition: var(--transition);
+  }
+  .nav-links.open { right: 0; }
+}
+
+@media (max-width: 650px) {
+  .header-actions .btn-primary,
+  .header-actions .btn-secondary {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.82rem;
+  }
+}
