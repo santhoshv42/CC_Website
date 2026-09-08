@@ -1,5 +1,5 @@
 // Testimonies Rendering & Submission Handler
-import testimoniesData from '../data/testimonies.json';
+import testimoniesData from '../data/testimonies.js';
 
 export function initTestimonies() {
   const homePreview = document.getElementById('homeTestimoniesPreview');

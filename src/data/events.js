@@ -1,0 +1,38 @@
+// Events Data Module
+const eventsData = [
+  {
+    "id": "evt-1",
+    "title": "Sunday Worship Service",
+    "day": "Every Sunday",
+    "time": "08:00 AM & 10:30 AM",
+    "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
+    "category": "Weekly Service",
+    "description": "Experience divine worship, anointing word by Prophet Michael Manju, and miraculous healing prayers. All are welcome!",
+    "badge": "Primary Service",
+    "details": "• 08:00 AM — Tamil Service\n• 10:30 AM — Kannada Service"
+  },
+  {
+    "id": "evt-2",
+    "title": "Mid-Week Miracle & Prayer Service",
+    "day": "Every Wednesday",
+    "time": "06:30 PM onwards",
+    "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
+    "category": "Prayer & Bible Study",
+    "description": "Deep biblical teaching, intercessory prayer for families, sick, and deliverance ministration.",
+    "badge": "Mid-Week"
+  },
+  {
+    "id": "evt-3",
+    "title": "Fasting and Deliverance Prayer Meeting",
+    "day": "Every Month Second Saturday",
+    "time": "10:30 AM onwards",
+    "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
+    "category": "Monthly Special Meeting",
+    "description": "Special monthly fasting, prophetic revelation, and deliverance prayer meeting with Prophet Michael Manju.",
+    "badge": "Special Event",
+    "note": "🍲 Note: Lunch will be provided."
+  }
+];
+
+export default eventsData;
+

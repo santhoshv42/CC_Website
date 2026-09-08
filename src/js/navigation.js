@@ -56,13 +56,20 @@ export function initNavigation() {
     });
   }
 
-  // Check URL hash on page load
-  const hash = window.location.hash;
-  if (hash) {
-    const viewIdFromHash = hash.replace('#', '') + '-view';
-    const exists = document.getElementById(viewIdFromHash);
-    if (exists) {
-      switchView(viewIdFromHash);
+  // Check URL hash on load or URL hash changes (back/forward navigation)
+  function handleHashChange() {
+    const hash = window.location.hash;
+    if (hash) {
+      const viewIdFromHash = hash.replace('#', '') + '-view';
+      const exists = document.getElementById(viewIdFromHash);
+      if (exists) {
+        switchView(viewIdFromHash);
+        return;
+      }
     }
+    switchView('home-view');
   }
+
+  window.addEventListener('hashchange', handleHashChange);
+  handleHashChange();
 }

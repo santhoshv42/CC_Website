@@ -1,5 +1,5 @@
 // Render Events and Service Timings
-import eventsData from '../data/events.json';
+import eventsData from '../data/events.js';
 
 export function initEvents() {
   const homeGrid = document.getElementById('homeTimingsGrid');

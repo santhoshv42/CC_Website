@@ -1,5 +1,5 @@
 // Daily Verse Marquee Ticker Handler
-import dailyVerses from '../data/daily_verses.json';
+import dailyVerses from '../data/daily_verses.js';
 
 export function initDailyVerseTicker() {
   const tickerText = document.getElementById('tickerText');
