@@ -47,6 +47,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -55,6 +57,9 @@ body {
   color: var(--slate-dark);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -346,8 +351,9 @@ section {
   .nav-links {
     position: fixed;
     top: 80px;
-    right: -100%;
+    right: 0;
     width: 290px;
+    max-width: 85vw;
     height: calc(100vh - 80px);
     background: var(--bg-surface);
     flex-direction: column;
@@ -355,10 +361,19 @@ section {
     padding: 2rem 1.5rem;
     gap: 1.2rem;
     box-shadow: -10px 0 30px rgba(0,0,0,0.15);
-    transition: var(--transition);
+    transform: translateX(100%);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1000;
   }
-  .nav-links.open { right: 0; }
+  .nav-links.open {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 @media (max-width: 650px) {
