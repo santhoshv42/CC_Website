@@ -642,9 +642,15 @@ textarea.input-error {
 }
 
 @media (max-width: 768px) {
+  section { padding: 3rem 0; }
+  .hero-section { padding: 2.2rem 0 3.2rem; }
   .hero-grid, .founder-grid, .offering-grid, .footer-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
+  .hero-image-card img { height: 320px; }
+  .founder-photo-box img { height: 360px; }
   .form-group-grid { grid-template-columns: 1fr; }
   .prayer-card-container { padding: 1.5rem; }
+  .timings-grid { grid-template-columns: 1fr; }
 }
