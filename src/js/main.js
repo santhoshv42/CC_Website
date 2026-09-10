@@ -1,5 +1,42 @@
-// Main JavaScript Application for Calvary Church Website
-// Built for universal execution across static hosting (GitHub Pages, Hostinger, etc.) and Vite
+// Google Sheets Integration WebApp Endpoint URL
+// Paste your Google Apps Script Web App URL below to send live Prayer Requests & Testimonies directly to your Google Sheet / Excel spreadsheet.
+let GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyEZWH3p5lsl0dsiUZDCHpij5l9BusPU-7gSZJnxSFiDjkiP9RUOcU6OPNT0SS7HsqbPw/exec';
+
+async function sendToGoogleSheet(payload) {
+  if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
+    console.log('[Google Sheets Integration] Endpoint URL not set yet. Data saved locally:', payload);
+    return;
+  }
+
+  try {
+    await fetch(GOOGLE_SHEET_WEBAPP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    console.log('[Google Sheets Integration] Data sent successfully for:', payload.formType);
+  } catch (err) {
+    console.warn('[Google Sheets Integration] Network error:', err);
+  }
+}
+
+async function fetchApprovedTestimoniesFromSheet() {
+  if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
+    return null;
+  }
+  try {
+    const res = await fetch(GOOGLE_SHEET_WEBAPP_URL);
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json.testimonies && Array.isArray(json.testimonies) ? json.testimonies : null;
+  } catch (err) {
+    console.warn('[Google Sheets Integration] Could not fetch approved testimonies:', err);
+    return null;
+  }
+}
 
 // -----------------------------------------------------------------------------
 // 1. DATA MODULES
@@ -472,45 +509,113 @@ function initTestimonies() {
     `;
   }
 
-  if (homePreview) homePreview.innerHTML = allTestimonies.slice(0, 3).map(renderCard).join('');
-  if (fullGrid) fullGrid.innerHTML = allTestimonies.map(renderCard).join('');
+  // Read EXCLUSIVELY from Google Sheets (Excel file)
+  fetchApprovedTestimoniesFromSheet().then(sheetTestimonies => {
+    if (sheetTestimonies && sheetTestimonies.length > 0) {
+      if (homePreview) homePreview.innerHTML = sheetTestimonies.slice(0, 3).map(renderCard).join('');
+      if (fullGrid) fullGrid.innerHTML = sheetTestimonies.map(renderCard).join('');
+    } else {
+      const emptyStateHtml = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1.5rem; background: var(--bg-surface); border: 1px dashed var(--border-light); border-radius: var(--radius-md);">
+          <div style="font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 0.8rem;">✨</div>
+          <h3 style="font-family: var(--font-heading); color: var(--slate-dark); font-size: 1.3rem;">No Approved Testimonies Yet</h3>
+          <p style="color: var(--slate-medium); margin: 0.5rem 0 1.2rem; font-size: 0.95rem;">Testimonies set to 'Yes' under Display Testimony in your Google Sheet will appear here live!</p>
+          <button class="btn-primary" onclick="document.getElementById('testimonyModal').classList.add('active')" style="margin: 0 auto;">
+            <span>Share Your Testimony</span>
+          </button>
+        </div>
+      `;
+      if (homePreview) homePreview.innerHTML = emptyStateHtml;
+      if (fullGrid) fullGrid.innerHTML = emptyStateHtml;
+    }
+  });
+
+  const testimonySuccessModal = document.getElementById('testimonySuccessModal');
+  const closeTestimonySuccessModal = document.getElementById('closeTestimonySuccessModal');
+  const btnDoneTestimonyModal = document.getElementById('btnDoneTestimonyModal');
+
+  const nameInput = document.getElementById('testifierName');
+  const cityInput = document.getElementById('testifierCity');
+  const headlineInput = document.getElementById('testimonyHeadline');
+  const detailInput = document.getElementById('testimonyDetail');
+
+  const nameError = document.getElementById('testifierNameError');
+  const cityError = document.getElementById('testifierCityError');
+  const headlineError = document.getElementById('testimonyTitleError');
+  const detailError = document.getElementById('testimonyDetailError');
+
+  function clearError(input, errorEl) {
+    if (input) input.classList.remove('input-error');
+    if (errorEl) { errorEl.textContent = ''; errorEl.style.display = 'none'; }
+  }
+
+  function showError(input, errorEl, msg) {
+    if (input) input.classList.add('input-error');
+    if (errorEl) { errorEl.textContent = '⚠️ ' + msg; errorEl.style.display = 'block'; }
+  }
 
   openBtn?.addEventListener('click', () => modal?.classList.add('active'));
   closeBtn?.addEventListener('click', () => modal?.classList.remove('active'));
 
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('testifierName')?.value.trim();
-    const city = document.getElementById('testifierCity')?.value.trim();
-    const title = document.getElementById('testimonyHeadline')?.value.trim();
-    const story = document.getElementById('testimonyDetail')?.value.trim();
+    const name = nameInput?.value.trim();
+    const city = cityInput?.value.trim();
+    const title = headlineInput?.value.trim();
+    const story = detailInput?.value.trim();
 
-    if (!name || !city || !title || !story) {
-      alert('Please complete all testimony fields.');
-      return;
+    let isValid = true;
+    if (!name) { showError(nameInput, nameError, 'Name is required.'); isValid = false; } else clearError(nameInput, nameError);
+    if (!city) { showError(cityInput, cityError, 'City / Location is required.'); isValid = false; } else clearError(cityInput, cityError);
+    if (!title) { showError(headlineInput, headlineError, 'Testimony title is required.'); isValid = false; } else clearError(headlineInput, headlineError);
+    if (!story) { showError(detailInput, detailError, 'Testimony story details required.'); isValid = false; } else clearError(detailInput, detailError);
+
+    if (!isValid) return;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>⏳ Submitting Testimony...</span>';
+      submitBtn.style.opacity = '0.75';
+      submitBtn.style.cursor = 'wait';
     }
 
-    const newTestimony = {
-      id: 'tst-' + Date.now(),
+    // Dispatch payload to Google Sheets for Admin Moderation (defaults to Display Testimony = "No")
+    await sendToGoogleSheet({
+      formType: 'Testimony',
+      timestamp: new Date().toLocaleString(),
       name,
       city,
       title,
-      story,
-      category: 'Member Testimony',
-      date: 'Just Now'
-    };
-
-    storedUserTestimonies.unshift(newTestimony);
-    localStorage.setItem('cc_user_testimonies', JSON.stringify(storedUserTestimonies));
+      details: story
+    });
 
     form.reset();
     modal?.classList.remove('active');
 
-    const updated = [...storedUserTestimonies, ...testimoniesData];
-    if (fullGrid) fullGrid.innerHTML = updated.map(renderCard).join('');
-    if (homePreview) homePreview.innerHTML = updated.slice(0, 3).map(renderCard).join('');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor = 'pointer';
+    }
 
-    alert('Thank you! Your testimony has been submitted.');
+    // Open success modal informing user that testimony is submitted for review
+    if (testimonySuccessModal) {
+      testimonySuccessModal.classList.add('active');
+    }
+  });
+
+  function closeSuccessModal() {
+    if (testimonySuccessModal) testimonySuccessModal.classList.remove('active');
+  }
+
+  closeTestimonySuccessModal?.addEventListener('click', closeSuccessModal);
+  btnDoneTestimonyModal?.addEventListener('click', () => {
+    closeSuccessModal();
+    const testimoniesTrigger = document.querySelector('[data-view="testimonies-view"]');
+    if (testimoniesTrigger) testimoniesTrigger.click();
   });
 }
 
@@ -599,7 +704,7 @@ function initPrayerForm() {
     if (messageInput.value.trim()) clearError(messageInput, messageError);
   });
 
-  prayerForm.addEventListener('submit', (e) => {
+  prayerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = nameInput?.value.trim() || '';
@@ -650,6 +755,15 @@ function initPrayerForm() {
       return;
     }
 
+    const submitBtn = prayerForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>⏳ Submitting Prayer Request...</span>';
+      submitBtn.style.opacity = '0.75';
+      submitBtn.style.cursor = 'wait';
+    }
+
     const newSubmission = {
       id: 'pr-' + Date.now(),
       name,
@@ -660,15 +774,36 @@ function initPrayerForm() {
       timestamp: new Date().toISOString()
     };
 
+    const confidential = document.getElementById('confidentialCheck')?.checked ? 'Yes' : 'No';
+
     const existingRequests = JSON.parse(localStorage.getItem('cc_prayer_requests') || '[]');
     existingRequests.push(newSubmission);
     localStorage.setItem('cc_prayer_requests', JSON.stringify(existingRequests));
+
+    // Dispatch payload to Google Sheets
+    await sendToGoogleSheet({
+      formType: 'Prayer Request',
+      timestamp: new Date().toLocaleString(),
+      name,
+      email,
+      phone,
+      category,
+      details: message,
+      confidential
+    });
 
     prayerForm.reset();
     clearError(emailInput, emailError);
     clearError(phoneInput, phoneError);
     clearError(nameInput, nameError);
     clearError(messageInput, messageError);
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor = 'pointer';
+    }
 
     if (prayerSuccessModal) {
       prayerSuccessModal.classList.add('active');

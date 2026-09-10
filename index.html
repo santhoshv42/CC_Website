@@ -505,29 +505,59 @@
 
   <!-- Submit Testimony Modal -->
   <div class="modal-overlay" id="testimonyModal">
-    <div class="modal-content">
-      <button class="modal-close-btn" id="closeTestimonyModal">&times;</button>
-      <span class="section-tag">Testimony Form</span>
-      <h3 style="font-family: var(--font-heading); margin: 0.5rem 0 1.2rem;">Share How God Blessed You</h3>
-      <form id="testimonyForm">
-        <div class="form-group">
-          <label for="testifierName">Your Name</label>
-          <input type="text" id="testifierName" placeholder="e.g. Sister Grace" required>
+    <div class="modal-content" style="max-width: 580px; max-height: 90vh; overflow-y: auto;">
+      <button class="modal-close-btn" id="closeTestimonyModal" aria-label="Close modal">&times;</button>
+      <span class="section-tag">— SHARE YOUR TESTIMONY</span>
+      <h3 style="font-family: var(--font-heading); margin: 0.4rem 0 0.4rem; font-size: 1.6rem; color: var(--slate-dark);">Share How God Blessed You</h3>
+      <p style="font-size: 0.92rem; color: var(--slate-medium); margin-bottom: 1.5rem; line-height: 1.5;">
+        Your testimony of God’s healing, deliverance, and faithfulness inspires others to trust Him for their miracle.
+      </p>
+
+      <form id="testimonyForm" novalidate>
+        <div class="form-group-grid" style="margin-bottom: 1.2rem;">
+          <div class="form-group">
+            <label for="testifierName">Your Name *</label>
+            <input type="text" id="testifierName" placeholder="e.g. Sister Grace K." required>
+            <span class="form-error-msg" id="testifierNameError" style="display:none;"></span>
+          </div>
+          <div class="form-group">
+            <label for="testifierCity">City / Location *</label>
+            <input type="text" id="testifierCity" placeholder="e.g. Bengaluru, Karnataka" required>
+            <span class="form-error-msg" id="testifierCityError" style="display:none;"></span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="testifierCity">City / Location</label>
-          <input type="text" id="testifierCity" placeholder="e.g. Chennai" required>
+
+        <div class="form-group full-width" style="margin-bottom: 1.2rem;">
+          <label for="testimonyHeadline">Testimony Title *</label>
+          <input type="text" id="testimonyHeadline" placeholder="e.g. Healed of Stage 3 Tumor" required>
+          <span class="form-error-msg" id="testimonyTitleError" style="display:none;"></span>
         </div>
-        <div class="form-group">
-          <label for="testimonyHeadline">Testimony Title</label>
-          <input type="text" id="testimonyHeadline" placeholder="e.g. Miraculous Healing from Surgery" required>
+
+        <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+          <label for="testimonyDetail">Your Testimony Story *</label>
+          <textarea id="testimonyDetail" rows="4" placeholder="Share what God did in your life, how prayer was answered, and the glory given to Jesus..." required></textarea>
+          <span class="form-error-msg" id="testimonyDetailError" style="display:none;"></span>
         </div>
-        <div class="form-group">
-          <label for="testimonyDetail">Your Story</label>
-          <textarea id="testimonyDetail" rows="4" placeholder="Describe what God did..." required></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Submit Testimony</button>
+
+        <button type="submit" class="btn-primary" id="btnSubmitTestimony" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 0.85rem;">
+          <span>✨ Submit Testimony & Build Faith</span>
+        </button>
       </form>
+    </div>
+  </div>
+
+  <!-- Testimony Submission Success Modal -->
+  <div class="modal-overlay" id="testimonySuccessModal">
+    <div class="modal-content text-center" style="max-width: 500px;">
+      <button class="modal-close-btn" id="closeTestimonySuccessModal" aria-label="Close modal">&times;</button>
+      <div style="font-size: 3.5rem; color: var(--gold-primary); margin-bottom: 1rem;">🙌</div>
+      <h2 style="font-family: var(--font-heading); color: var(--slate-dark); font-size: 1.7rem;">Testimony Submitted!</h2>
+      <p style="margin: 1rem 0 1.6rem; color: var(--slate-medium); line-height: 1.6; font-size: 0.98rem;">
+        Praise the Lord! Thank you for sharing your miracle. Your testimony has been submitted for review and will be published live on the website once approved by our church team.
+      </p>
+      <button class="btn-primary" id="btnDoneTestimonyModal" style="margin: 0 auto; padding: 0.75rem 1.8rem;">
+        Glory to God & View Testimonies
+      </button>
     </div>
   </div>
 
