@@ -126,9 +126,36 @@ const dailyVerses = [
   {"day": 118, "date": "Apr 28", "reference": "1 John 5:4", "text": "For everyone born of God overcomes the world. This is the victory that has overcome the world, even our faith."},
   {"day": 119, "date": "Apr 29", "reference": "Jude 1:24-25", "text": "To him who is able to keep you from stumbling and to present you before his glorious presence without fault and with great joy—to the only God our Savior be glory."},
   {"day": 120, "date": "Apr 30", "reference": "Revelation 3:20", "text": "Here I am! I stand at the door and knock. If anyone hears my voice and opens the door, I will come in and eat with that person, and they with me."},
+  {"day": 244, "date": "Sep 01", "reference": "Psalm 103:1", "text": "Praise the Lord, my soul; all my inmost being, praise his holy name."},
+  {"day": 245, "date": "Sep 02", "reference": "Proverbs 3:5", "text": "Trust in the Lord with all your heart and lean not on your own understanding."},
+  {"day": 246, "date": "Sep 03", "reference": "Isaiah 40:29", "text": "He gives strength to the weary and increases the power of the weak."},
+  {"day": 247, "date": "Sep 04", "reference": "Jeremiah 29:11", "text": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future."},
+  {"day": 248, "date": "Sep 05", "reference": "Matthew 6:33", "text": "But seek first his kingdom and his righteousness, and all these things will be given to you as well."},
+  {"day": 249, "date": "Sep 06", "reference": "Romans 8:28", "text": "And we know that in all things God works for the good of those who love him."},
   {"day": 250, "date": "Sep 07", "reference": "Psalm 126:3", "text": "The Lord has done great things for us, and we are filled with joy."},
   {"day": 251, "date": "Sep 08", "reference": "Isaiah 43:2", "text": "When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you."},
   {"day": 252, "date": "Sep 09", "reference": "Psalm 91:11", "text": "For he will command his angels concerning you to guard you in all your ways."},
+  {"day": 253, "date": "Sep 10", "reference": "Isaiah 40:31", "text": "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint."},
+  {"day": 254, "date": "Sep 11", "reference": "Psalm 121:7-8", "text": "The Lord will keep you from all harm—he will watch over your life; the Lord will watch over your coming and going both now and forevermore."},
+  {"day": 255, "date": "Sep 12", "reference": "Philippians 4:13", "text": "I can do all things through Christ who strengthens me."},
+  {"day": 256, "date": "Sep 13", "reference": "Joshua 1:9", "text": "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."},
+  {"day": 257, "date": "Sep 14", "reference": "Psalm 46:10", "text": "Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth."},
+  {"day": 258, "date": "Sep 15", "reference": "John 3:16", "text": "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."},
+  {"day": 259, "date": "Sep 16", "reference": "Psalm 119:105", "text": "Your word is a lamp for my feet, a light on my path."},
+  {"day": 260, "date": "Sep 17", "reference": "Romans 12:2", "text": "Do not conform to the pattern of this world, but be transformed by the renewing of your mind."},
+  {"day": 261, "date": "Sep 18", "reference": "1 Corinthians 13:13", "text": "And now these three remain: faith, hope and love. But the greatest of these is love."},
+  {"day": 262, "date": "Sep 19", "reference": "Galatians 5:22-23", "text": "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control."},
+  {"day": 263, "date": "Sep 20", "reference": "Ephesians 2:8-9", "text": "For it is by grace you have been saved, through faith—and this is not from yourselves, it is the gift of God."},
+  {"day": 264, "date": "Sep 21", "reference": "Hebrews 11:1", "text": "Now faith is confidence in what we hope for and assurance about what we do not see."},
+  {"day": 265, "date": "Sep 22", "reference": "1 Peter 5:7", "text": "Cast all your anxiety on him because he cares for you."},
+  {"day": 266, "date": "Sep 23", "reference": "Psalm 27:1", "text": "The Lord is my light and my salvation—whom shall I fear? The Lord is the stronghold of my life—of whom shall I be afraid?"},
+  {"day": 267, "date": "Sep 24", "reference": "Isaiah 41:10", "text": "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you."},
+  {"day": 268, "date": "Sep 25", "reference": "Matthew 11:28", "text": "Come to me, all you who are weary and burdened, and I will give you rest."},
+  {"day": 269, "date": "Sep 26", "reference": "John 14:6", "text": "Jesus answered, 'I am the way and the truth and the life. No one comes to the Father except through me.'"},
+  {"day": 270, "date": "Sep 27", "reference": "Romans 8:31", "text": "If God is for us, who can be against us?"},
+  {"day": 271, "date": "Sep 28", "reference": "Philippians 4:6-7", "text": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God."},
+  {"day": 272, "date": "Sep 29", "reference": "Colossians 3:23", "text": "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."},
+  {"day": 273, "date": "Sep 30", "reference": "Psalm 91:1-2", "text": "Whoever dwells in the shelter of the Most High will rest in the shadow of the Almighty."},
   {"day": 365, "date": "Dec 31", "reference": "Numbers 6:24-26", "text": "The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you; the Lord turn his face toward you and give you peace."}
 ];
 
@@ -218,30 +245,44 @@ function initDailyVerseTicker() {
 
   if (!dailyVerses || !dailyVerses.length) return;
 
-  // Calculate day of year (1 - 365)
+  // Get current local date formatting (e.g., "Sep 10")
   const now = new Date();
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const currentMonthStr = months[now.getMonth()];
+  const currentDayNum = now.getDate();
+  const formattedToday = `${currentMonthStr} ${String(currentDayNum).padStart(2, '0')}`;
+
+  // Calculate day of year (1 - 366)
   const start = new Date(now.getFullYear(), 0, 0);
   const diff = now - start;
   const oneDay = 1000 * 60 * 60 * 24;
   const dayOfYear = Math.floor(diff / oneDay);
 
-  // Find verse matching today's day of year or fallback to index
-  let todayVerse = dailyVerses.find(v => v.day === dayOfYear) || dailyVerses[dayOfYear % dailyVerses.length] || dailyVerses[0];
+  // Match by today's date string (e.g. "Sep 10") or day of year
+  let todayVerse = dailyVerses.find(v => v.date === formattedToday) ||
+                   dailyVerses.find(v => v.day === dayOfYear) ||
+                   dailyVerses[(dayOfYear - 1) % dailyVerses.length] ||
+                   dailyVerses[0];
 
   if (todayVerse) {
-    if (tickerText) tickerText.textContent = `"${todayVerse.text}"`;
-    if (tickerRef) tickerRef.textContent = `— ${todayVerse.reference} (${todayVerse.date})`;
-  }
+    const displayRef = `— ${todayVerse.reference} (${formattedToday})`;
 
-  // Double content inside marquee track for continuous loop effect
-  if (tickerTrack && todayVerse) {
-    const existingDuplicate = tickerTrack.querySelector('.ticker-duplicate');
-    if (!existingDuplicate) {
-      const duplicateSpan = document.createElement('span');
-      duplicateSpan.className = 'ticker-duplicate';
-      duplicateSpan.style.marginLeft = '4rem';
-      duplicateSpan.innerHTML = `<span class="verse-text-span">"${todayVerse.text}"</span> <span class="verse-ref-span">— ${todayVerse.reference}</span>`;
-      tickerTrack.appendChild(duplicateSpan);
+    if (tickerText) tickerText.textContent = `"${todayVerse.text}"`;
+    if (tickerRef) tickerRef.textContent = displayRef;
+
+    // Double content inside marquee track for continuous loop effect
+    if (tickerTrack) {
+      const existingDuplicate = tickerTrack.querySelector('.ticker-duplicate');
+      if (!existingDuplicate) {
+        const duplicateSpan = document.createElement('span');
+        duplicateSpan.className = 'ticker-duplicate';
+        duplicateSpan.style.marginLeft = '4rem';
+        duplicateSpan.innerHTML = `<span class="verse-text-span">"${todayVerse.text}"</span> <span class="verse-ref-span">${displayRef}</span>`;
+        tickerTrack.appendChild(duplicateSpan);
+      } else {
+        const dupRef = existingDuplicate.querySelector('.verse-ref-span');
+        if (dupRef) dupRef.textContent = displayRef;
+      }
     }
   }
 }
