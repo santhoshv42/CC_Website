@@ -383,13 +383,14 @@ textarea.input-error {
 
 /* OFFERING PAGE */
 .offering-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  align-items: start;
+  display: flex;
+  justify-content: center;
+  max-width: 540px;
+  margin: 0 auto;
 }
 
 .qr-card {
+  width: 100%;
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
