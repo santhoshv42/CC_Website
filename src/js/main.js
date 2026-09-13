@@ -1,6 +1,6 @@
 // Google Sheets Integration WebApp Endpoint URL
 // Paste your Google Apps Script Web App URL below to send live Prayer Requests & Testimonies directly to your Google Sheet / Excel spreadsheet.
-let GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyEZWH3p5lsl0dsiUZDCHpij5l9BusPU-7gSZJnxSFiDjkiP9RUOcU6OPNT0SS7HsqbPw/exec';
+let GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw_7y-k_bnFvKAYlmc2_dE6_CDbL_GkL4puxoKtQirb_CKp1hc1C8KeBzvrpiXUlRvubg/exec';
 
 async function sendToGoogleSheet(payload) {
   if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_URL')) {
