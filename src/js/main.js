@@ -825,6 +825,113 @@ function initPrayerForm() {
 }
 
 // -----------------------------------------------------------------------------
+// GALLERY & LIGHTBOX CONTROLLER
+// -----------------------------------------------------------------------------
+function initGalleryAndLightbox() {
+  const tabBtns = document.querySelectorAll('.gallery-tab-btn');
+  const galleryCards = document.querySelectorAll('.gallery-card');
+  const lightboxModal = document.getElementById('galleryLightboxModal');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCategory = document.getElementById('lightboxCategory');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let currentVisibleCards = Array.from(galleryCards);
+  let currentIndex = 0;
+
+  // 1. Category Filtering
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      galleryCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Update array of visible cards for Lightbox navigation
+      currentVisibleCards = Array.from(galleryCards).filter(c => c.style.display !== 'none');
+    });
+  });
+
+  // 2. Open Lightbox
+  galleryCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      currentVisibleCards = Array.from(galleryCards).filter(c => c.style.display !== 'none');
+      const indexInVisible = currentVisibleCards.indexOf(card);
+      if (indexInVisible !== -1) {
+        openLightboxAtIndex(indexInVisible);
+      }
+    });
+  });
+
+  function openLightboxAtIndex(index) {
+    if (currentVisibleCards.length === 0) return;
+    if (index < 0) index = currentVisibleCards.length - 1;
+    if (index >= currentVisibleCards.length) index = 0;
+    
+    currentIndex = index;
+    const card = currentVisibleCards[currentIndex];
+
+    const imgSrc = card.getAttribute('data-img') || card.querySelector('img')?.src;
+    const title = card.getAttribute('data-title') || '';
+    const tag = card.getAttribute('data-tag') || '';
+
+    if (lightboxImg) lightboxImg.src = imgSrc;
+    if (lightboxTitle) lightboxTitle.textContent = title;
+    if (lightboxCategory) lightboxCategory.textContent = tag;
+    if (lightboxCounter) lightboxCounter.textContent = `${currentIndex + 1} of ${currentVisibleCards.length}`;
+
+    lightboxModal?.classList.add('active');
+  }
+
+  function closeLightbox() {
+    lightboxModal?.classList.remove('active');
+  }
+
+  // Prev / Next Controls
+  lightboxPrev?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openLightboxAtIndex(currentIndex - 1);
+  });
+
+  lightboxNext?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openLightboxAtIndex(currentIndex + 1);
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+
+  lightboxModal?.addEventListener('click', (e) => {
+    if (e.target === lightboxModal) {
+      closeLightbox();
+    }
+  });
+
+  // Keyboard navigation (Arrow keys + Escape)
+  window.addEventListener('keydown', (e) => {
+    if (!lightboxModal?.classList.contains('active')) return;
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowLeft') {
+      openLightboxAtIndex(currentIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      openLightboxAtIndex(currentIndex + 1);
+    }
+  });
+}
+
+// -----------------------------------------------------------------------------
 // 3. APPLICATION BOOTSTRAPPER (FAIL-SAFE)
 // -----------------------------------------------------------------------------
 
@@ -835,6 +942,7 @@ function initApp() {
   initEvents();
   initTestimonies();
   initPrayerForm();
+  initGalleryAndLightbox();
   console.log('Calvary Church Website initialized successfully.');
 }
 
