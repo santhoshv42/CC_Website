@@ -459,17 +459,8 @@
 
     <!-- VIEW 7: CHURCH PHOTO GALLERY PAGE -->
     <div id="gallery-view" class="page-view">
-      <section class="hero-section">
-        <div class="container text-center" style="max-width: 800px;">
-          <span class="section-tag">Glimpses of Faith</span>
-          <h1>Church Photo Gallery</h1>
-          <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">
-            Witness moments of praise, worship, prophetic ministry, fasting prayer, and community fellowship at Calvary Church - Jesus Mission Ministries.
-          </p>
-        </div>
-      </section>
-
-      <section style="background: var(--bg-surface);">
+      <!-- TOP SECTION: Filter Tabs & Top Photo Grid -->
+      <section style="background: var(--bg-surface); padding-top: 2.2rem; padding-bottom: 2.5rem;">
         <div class="container">
           <!-- Filter Tabs -->
           <div class="gallery-filter-tabs">
@@ -480,8 +471,8 @@
             <button class="gallery-tab-btn" data-filter="fellowship">Community Fellowship</button>
           </div>
 
-          <!-- Photo Grid -->
-          <div class="gallery-grid" id="galleryGrid">
+          <!-- Top Photo Grid (Items 1-6) -->
+          <div class="gallery-grid" id="galleryGridTop">
             <!-- Item 1 -->
             <div class="gallery-card" data-category="ministry" data-title="Prophetic Ministry & Laying of Hands" data-tag="PROPHETIC MINISTRY" data-date="Sep 2026" data-img="./public/assets/gallery/gallery_1.svg">
               <div class="gallery-img-wrap">
@@ -571,7 +562,26 @@
                 <span class="gallery-date">Jul 2026</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- MIDDLE SECTION: Hero Title Banner -->
+      <section class="hero-section" style="padding: 3.5rem 0;">
+        <div class="container text-center" style="max-width: 800px;">
+          <span class="section-tag">Glimpses of Faith</span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; color: var(--slate-dark); margin: 0.8rem 0 1rem; letter-spacing: -0.01em;">CHURCH PHOTO GALLERY</h2>
+          <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">
+            Witness moments of praise, worship, prophetic ministry, fasting prayer, and community fellowship at Calvary Church - Jesus Mission Ministries.
+          </p>
+        </div>
+      </section>
+
+      <!-- BOTTOM SECTION: Bottom Photo Grid -->
+      <section style="background: var(--bg-surface); padding-top: 3rem; padding-bottom: 3.5rem;">
+        <div class="container">
+          <!-- Bottom Photo Grid (Items 7-10) -->
+          <div class="gallery-grid" id="galleryGridBottom">
             <!-- Item 7 -->
             <div class="gallery-card" data-category="fellowship" data-title="Church Fellowship & Community Gathering" data-tag="FELLOWSHIP" data-date="Jun 2026" data-img="./public/assets/gallery/gallery_7.svg">
               <div class="gallery-img-wrap">
