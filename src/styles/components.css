@@ -136,7 +136,7 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 1.8rem 1.6rem 1.4rem;
+  padding: 0;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
@@ -147,6 +147,60 @@
   height: 100%;
 }
 
+.timing-card-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: var(--bg-subtle);
+  position: relative;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+}
+
+.timing-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.timing-card-image:hover img {
+  transform: scale(1.05);
+}
+
+.timing-card-zoom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 3;
+}
+
+.timing-card-zoom-btn {
+  padding: 0.45rem 0.9rem;
+  background: var(--gold-primary);
+  color: #0F172A;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: var(--shadow-md);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.timing-card-image:hover .timing-card-zoom-overlay {
+  opacity: 1;
+}
+
 .timing-card::before {
   content: '';
   position: absolute;
@@ -155,6 +209,7 @@
   width: 4px;
   height: 100%;
   background: var(--gold-primary);
+  z-index: 2;
 }
 
 .timing-card:hover {
@@ -167,7 +222,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.2rem;
+  padding: 1.5rem 1.6rem 1rem;
 }
 
 .timing-day-badge {
@@ -184,9 +239,16 @@
 .timing-title {
   font-family: var(--font-heading);
   font-size: 1.25rem;
-  line-height: 1.3;
+  line-height: 1.35;
   margin: 0.3rem 0 0.8rem;
   color: var(--slate-dark);
+  font-weight: 700;
+}
+
+.timing-desc {
+  color: var(--slate-medium);
+  font-size: 0.94rem;
+  line-height: 1.65;
 }
 
 .timing-time {
@@ -226,7 +288,7 @@
 
 .timing-card-footer {
   border-top: 1px solid var(--border-light);
-  padding-top: 0.9rem;
+  padding: 0.9rem 1.6rem 1.2rem;
   font-size: 0.82rem;
   color: var(--slate-medium);
   display: flex;
@@ -1063,3 +1125,170 @@ textarea.input-error {
   .lightbox-next { right: 0.5rem; }
   .gallery-grid { grid-template-columns: 1fr; }
 }
+
+/* -----------------------------------------------------------------------------
+   YOUTUBE MODAL & FRAME STYLES
+   ----------------------------------------------------------------------------- */
+.youtube-modal-content {
+  max-width: 860px !important;
+  padding: 2.2rem !important;
+}
+
+.events-youtube-banner {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.2rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  box-shadow: var(--shadow-md);
+  color: #FFFFFF;
+}
+
+.events-yt-banner-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin: 0.5rem 0 0.4rem;
+}
+
+.events-yt-banner-content p {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.yt-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(220, 38, 38, 0.2);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.video-responsive-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #0F172A;
+  border: 2px solid rgba(197, 160, 89, 0.4);
+  box-shadow: var(--shadow-lg);
+  margin: 1rem auto 1.2rem;
+}
+
+.yt-placeholder-fallback {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0F172A;
+}
+
+.yt-placeholder-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) contrast(1.1);
+}
+
+.yt-placeholder-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  z-index: 2;
+}
+
+.video-responsive-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 3;
+}
+
+.video-responsive-wrap iframe.iframe-hidden {
+  display: none !important;
+}
+
+.youtube-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.youtube-footer-info {
+  font-size: 0.88rem;
+  color: var(--slate-medium);
+}
+
+.btn-youtube-direct {
+  background: #DC2626 !important;
+  border-color: #DC2626 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-youtube-direct:hover {
+  background: #B91C1C !important;
+  border-color: #B91C1C !important;
+}
+
+@media (max-width: 768px) {
+  .events-youtube-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+  .events-youtube-banner button {
+    width: 100%;
+    justify-content: center;
+  }
+  .youtube-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .btn-youtube-direct {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.events-youtube-inline-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 600px) {
+  .events-youtube-inline-card {
+    padding: 1.5rem 1rem;
+  }
+}
+
+

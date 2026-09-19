@@ -8,6 +8,12 @@ export function initEvents() {
   if (!eventsData || !eventsData.length) return;
 
   function renderTimingCard(evt) {
+    const imgHtml = evt.image ? `
+      <div class="timing-card-image" data-title="${evt.title}" data-badge="${evt.badge || evt.category}">
+        <img src="${evt.image}" onerror="this.onerror=null; this.src='./public/assets/church_hero.png';" alt="${evt.title}">
+      </div>
+    ` : '';
+
     const detailsHtml = evt.details ? `
       <div class="timing-details">
         ${evt.details.replace(/\n/g, '<br>')}
@@ -22,6 +28,7 @@ export function initEvents() {
 
     return `
       <div class="timing-card">
+        ${imgHtml}
         <div class="timing-card-body">
           <span class="timing-day-badge">${evt.badge || evt.category}</span>
           <h3 class="timing-title">${evt.title}</h3>

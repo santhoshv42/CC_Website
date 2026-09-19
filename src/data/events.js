@@ -3,6 +3,7 @@ const eventsData = [
   {
     "id": "evt-1",
     "title": "Sunday Worship Service",
+    "image": "./public/assets/event/Event_SundayMain.png",
     "day": "Every Sunday",
     "time": "08:00 AM & 10:30 AM",
     "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
@@ -14,6 +15,7 @@ const eventsData = [
   {
     "id": "evt-2",
     "title": "Mid-Week Miracle & Prayer Service",
+    "image": "./public/assets/event/Event_Midweek.png",
     "day": "Every Wednesday",
     "time": "06:30 PM onwards",
     "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
@@ -24,6 +26,7 @@ const eventsData = [
   {
     "id": "evt-3",
     "title": "Fasting and Deliverance Prayer Meeting",
+    "image": "./public/assets/event/Event_FastingDeliverance.png",
     "day": "Every Month Second Saturday",
     "time": "10:30 AM onwards",
     "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",

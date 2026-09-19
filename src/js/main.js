@@ -200,6 +200,7 @@ const eventsData = [
   {
     "id": "evt-1",
     "title": "Sunday Worship Service",
+    "image": "./public/assets/event/Event_SundayMain.png",
     "day": "Every Sunday",
     "time": "08:00 AM & 10:30 AM",
     "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
@@ -211,6 +212,7 @@ const eventsData = [
   {
     "id": "evt-2",
     "title": "Mid-Week Miracle & Prayer Service",
+    "image": "./public/assets/event/Event_Midweek.png",
     "day": "Every Wednesday",
     "time": "06:30 PM onwards",
     "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
@@ -221,6 +223,7 @@ const eventsData = [
   {
     "id": "evt-3",
     "title": "Fasting and Deliverance Prayer Meeting",
+    "image": "./public/assets/event/Event_FastingDeliverance.png",
     "day": "Every Month Second Saturday",
     "time": "10:30 AM onwards",
     "location": "Calvary Church 2nd Floor, Above HBR VAN Biryani, HBR Layout, Bangalore",
@@ -442,6 +445,12 @@ function initEvents() {
   if (!eventsData || !eventsData.length) return;
 
   function renderTimingCard(evt) {
+    const imgHtml = evt.image ? `
+      <div class="timing-card-image" data-title="${evt.title}" data-badge="${evt.badge || evt.category}">
+        <img src="${evt.image}" onerror="this.onerror=null; this.src='./public/assets/church_hero.png';" alt="${evt.title}">
+      </div>
+    ` : '';
+
     const detailsHtml = evt.details ? `
       <div class="timing-details">
         ${evt.details.replace(/\n/g, '<br>')}
@@ -454,8 +463,17 @@ function initEvents() {
       </div>
     ` : '';
 
+    const ytActionHtml = evt.isYouTube ? `
+      <div style="margin-top: 1rem;">
+        <button class="btn-primary open-youtube-modal-btn" style="width: 100%; justify-content: center; background: #DC2626; border-color: #DC2626;">
+          <span>▶ Watch YouTube Channel Frame</span>
+        </button>
+      </div>
+    ` : '';
+
     return `
       <div class="timing-card">
+        ${imgHtml}
         <div class="timing-card-body">
           <span class="timing-day-badge">${evt.badge || evt.category}</span>
           <h3 class="timing-title">${evt.title}</h3>
@@ -465,6 +483,7 @@ function initEvents() {
           ${detailsHtml}
           <p class="timing-desc">${evt.description}</p>
           ${noteHtml}
+          ${ytActionHtml}
         </div>
         <div class="timing-card-footer">
           <span style="flex-shrink:0;">📍</span>
@@ -476,6 +495,18 @@ function initEvents() {
 
   if (homeGrid) homeGrid.innerHTML = eventsData.map(renderTimingCard).join('');
   if (fullGrid) fullGrid.innerHTML = eventsData.map(renderTimingCard).join('');
+
+  document.querySelectorAll('.timing-card-image').forEach(imgWrap => {
+    imgWrap.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const img = imgWrap.querySelector('img');
+      const title = imgWrap.getAttribute('data-title') || 'Event Flyer';
+      const badge = imgWrap.getAttribute('data-badge') || 'CALVARY CHURCH';
+      if (img && img.src && typeof window.openEventImageModal === 'function') {
+        window.openEventImageModal(img.src, title, badge);
+      }
+    });
+  });
 }
 
 // Testimonies Rendering & Submission Handler
@@ -903,7 +934,46 @@ function initGalleryAndLightbox() {
     });
   });
 
+  let customGalleryList = null;
+  let customGalleryIndex = 0;
+  let customTitle = '';
+  let customTag = '';
+
+  window.openMultiPhotoModal = function(photosList, startIndex, title, tag) {
+    if (!photosList || !photosList.length) return;
+    customGalleryList = photosList;
+    customGalleryIndex = startIndex || 0;
+    customTitle = title || 'Outreach Programs';
+    customTag = tag || 'OUTREACH PROGRAMS';
+
+    renderCustomPhoto();
+  };
+
+  function renderCustomPhoto() {
+    if (!customGalleryList) return;
+    const src = customGalleryList[customGalleryIndex];
+    if (lightboxImg) lightboxImg.src = src;
+    if (lightboxTitle) lightboxTitle.textContent = customTitle;
+    if (lightboxCategory) lightboxCategory.textContent = customTag;
+    if (lightboxCounter) lightboxCounter.textContent = `Photo ${customGalleryIndex + 1} of ${customGalleryList.length}`;
+    if (lightboxPrev) lightboxPrev.style.display = 'flex';
+    if (lightboxNext) lightboxNext.style.display = 'flex';
+    lightboxModal?.classList.add('active');
+  }
+
+  window.openEventImageModal = function(src, title, tag) {
+    customGalleryList = null;
+    if (lightboxImg) lightboxImg.src = src;
+    if (lightboxTitle) lightboxTitle.textContent = title || 'Event Flyer';
+    if (lightboxCategory) lightboxCategory.textContent = tag || 'CALVARY EVENT';
+    if (lightboxCounter) lightboxCounter.textContent = 'Event Poster';
+    if (lightboxPrev) lightboxPrev.style.display = 'none';
+    if (lightboxNext) lightboxNext.style.display = 'none';
+    lightboxModal?.classList.add('active');
+  };
+
   function openLightboxAtIndex(index) {
+    customGalleryList = null;
     if (currentVisibleCards.length === 0) return;
     if (index < 0) index = currentVisibleCards.length - 1;
     if (index >= currentVisibleCards.length) index = 0;
@@ -919,23 +989,36 @@ function initGalleryAndLightbox() {
     if (lightboxTitle) lightboxTitle.textContent = title;
     if (lightboxCategory) lightboxCategory.textContent = tag;
     if (lightboxCounter) lightboxCounter.textContent = `${currentIndex + 1} of ${currentVisibleCards.length}`;
+    if (lightboxPrev) lightboxPrev.style.display = 'flex';
+    if (lightboxNext) lightboxNext.style.display = 'flex';
 
     lightboxModal?.classList.add('active');
   }
 
   function closeLightbox() {
+    customGalleryList = null;
     lightboxModal?.classList.remove('active');
   }
 
   // Prev / Next Controls
   lightboxPrev?.addEventListener('click', (e) => {
     e.stopPropagation();
-    openLightboxAtIndex(currentIndex - 1);
+    if (customGalleryList) {
+      customGalleryIndex = (customGalleryIndex - 1 + customGalleryList.length) % customGalleryList.length;
+      renderCustomPhoto();
+    } else {
+      openLightboxAtIndex(currentIndex - 1);
+    }
   });
 
   lightboxNext?.addEventListener('click', (e) => {
     e.stopPropagation();
-    openLightboxAtIndex(currentIndex + 1);
+    if (customGalleryList) {
+      customGalleryIndex = (customGalleryIndex + 1) % customGalleryList.length;
+      renderCustomPhoto();
+    } else {
+      openLightboxAtIndex(currentIndex + 1);
+    }
   });
 
   lightboxClose?.addEventListener('click', closeLightbox);
@@ -960,6 +1043,169 @@ function initGalleryAndLightbox() {
 }
 
 // -----------------------------------------------------------------------------
+// YOUTUBE VIDEO & CHANNEL MODAL CONTROLLER
+// -----------------------------------------------------------------------------
+function initYouTubeModal() {
+  const modal = document.getElementById('youtubeModal');
+  const iframe = document.getElementById('youtubeIframe');
+  const closeBtn = document.getElementById('closeYouTubeModal');
+  const openBtns = document.querySelectorAll('.open-youtube-modal-btn');
+
+  if (!modal || !iframe) return;
+
+  // Preserve default video/playlist iframe URL
+  const defaultSrc = iframe.getAttribute('data-src') || iframe.src;
+
+  function openModal() {
+    // Restore iframe src if previously cleared
+    if (!iframe.src || iframe.src === 'about:blank') {
+      iframe.src = defaultSrc;
+    }
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    // Pause video playback by temporarily resetting iframe src
+    iframe.src = 'about:blank';
+  }
+
+  openBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  // Event Delegation for dynamically rendered buttons (e.g., inside events grid)
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.open-youtube-modal-btn');
+    if (trigger) {
+      e.preventDefault();
+      openModal();
+    }
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+}
+
+function normalizeYouTubeEmbedUrl(url) {
+  if (!url) return '';
+  url = url.trim();
+
+  // If already embed URL format, return as is
+  if (url.includes('/embed/')) return url;
+
+  // Auto-convert YouTube live stream link (e.g. https://www.youtube.com/live/Ii3h7ev5pHw)
+  const liveMatch = url.match(/youtube\.com\/live\/([a-zA-Z0-9_-]+)/);
+  if (liveMatch && liveMatch[1]) {
+    return `https://www.youtube.com/embed/${liveMatch[1]}`;
+  }
+
+  // Auto-convert channel web page link (e.g. https://www.youtube.com/channel/UC...) to live stream embed format
+  const channelMatch = url.match(/youtube\.com\/channel\/(UC[a-zA-Z0-9_-]+)/);
+  if (channelMatch && channelMatch[1]) {
+    return `https://www.youtube.com/embed/live_stream?channel=${channelMatch[1]}`;
+  }
+
+  // Auto-convert watch link (e.g. https://www.youtube.com/watch?v=VIDEO_ID)
+  const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  if (watchMatch && watchMatch[1]) {
+    return `https://www.youtube.com/embed/${watchMatch[1]}`;
+  }
+
+  // Auto-convert short link (e.g. https://youtu.be/VIDEO_ID)
+  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+  if (shortMatch && shortMatch[1]) {
+    return `https://www.youtube.com/embed/${shortMatch[1]}`;
+  }
+
+  return url;
+}
+
+function initInlineYouTubeFrame() {
+  const inlineIframe = document.getElementById('youtubeInlineIframe');
+  if (!inlineIframe) return;
+
+  let currentSrc = inlineIframe.getAttribute('src') || '';
+  
+  // Auto-convert standard web URLs to embed format
+  const normalizedSrc = normalizeYouTubeEmbedUrl(currentSrc);
+  if (normalizedSrc !== currentSrc) {
+    inlineIframe.src = normalizedSrc;
+    currentSrc = normalizedSrc;
+  }
+
+  // If source contains placeholder text, hide iframe so Calvary Church background image fallback is displayed
+  if (currentSrc.includes('REPLACE_WITH_YOUR')) {
+    inlineIframe.classList.add('iframe-hidden');
+  } else {
+    inlineIframe.classList.remove('iframe-hidden');
+  }
+
+  inlineIframe.addEventListener('error', () => {
+    inlineIframe.classList.add('iframe-hidden');
+  });
+}
+
+function initOutreachCardControls() {
+  const multiCard = document.querySelector('.outreach-multi-card');
+  if (!multiCard) return;
+
+  const photos = JSON.parse(multiCard.getAttribute('data-photos') || '[]');
+  if (!photos.length) return;
+
+  let currentCardIndex = 0;
+  const mainImg = multiCard.querySelector('#outreachMainImg');
+  const prevBtn = multiCard.querySelector('.outreach-btn-prev');
+  const nextBtn = multiCard.querySelector('.outreach-btn-next');
+  const imgWrapper = multiCard.querySelector('.outreach-img-wrapper');
+
+  function updateCardPhoto(index) {
+    currentCardIndex = (index + photos.length) % photos.length;
+    if (mainImg) mainImg.src = photos[currentCardIndex];
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateCardPhoto(currentCardIndex - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateCardPhoto(currentCardIndex + 1);
+    });
+  }
+
+  if (imgWrapper) {
+    imgWrapper.addEventListener('click', () => {
+      const title = multiCard.getAttribute('data-title') || 'Outreach Programs';
+      const tag = multiCard.getAttribute('data-tag') || 'OUTREACH PROGRAMS';
+      if (typeof window.openMultiPhotoModal === 'function') {
+        window.openMultiPhotoModal(photos, currentCardIndex, title, tag);
+      }
+    });
+  }
+}
+
+// -----------------------------------------------------------------------------
 // 3. APPLICATION BOOTSTRAPPER (FAIL-SAFE)
 // -----------------------------------------------------------------------------
 
@@ -971,6 +1217,9 @@ function initApp() {
   initTestimonies();
   initPrayerForm();
   initGalleryAndLightbox();
+  initOutreachCardControls();
+  initYouTubeModal();
+  initInlineYouTubeFrame();
   console.log('Calvary Church Website initialized successfully.');
 }
 
