@@ -864,6 +864,34 @@ function initGalleryAndLightbox() {
     });
   });
 
+  // 0. Multi-Format Image Extension Auto-Fallback (.jpg, .jpeg, .png, .svg)
+  const supportedExtensions = ['.jpg', '.jpeg', '.png', '.svg'];
+
+  galleryCards.forEach(card => {
+    const imgEl = card.querySelector('img');
+    if (!imgEl) return;
+
+    const originalSrc = imgEl.getAttribute('src');
+    if (!originalSrc) return;
+
+    const lastDotIndex = originalSrc.lastIndexOf('.');
+    if (lastDotIndex === -1) return;
+
+    const basePath = originalSrc.substring(0, lastDotIndex);
+    const currentExt = originalSrc.substring(lastDotIndex).toLowerCase();
+    const extensionsToTry = [currentExt, ...supportedExtensions.filter(ext => ext !== currentExt)];
+    let extIndex = 0;
+
+    imgEl.addEventListener('error', function handleImgError() {
+      extIndex++;
+      if (extIndex < extensionsToTry.length) {
+        const nextSrc = basePath + extensionsToTry[extIndex];
+        imgEl.src = nextSrc;
+        card.setAttribute('data-img', nextSrc);
+      }
+    });
+  });
+
   // 2. Open Lightbox
   galleryCards.forEach((card) => {
     card.addEventListener('click', () => {
