@@ -862,14 +862,14 @@ textarea.input-error {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.4rem;
 }
 
 .gallery-card {
   background: var(--bg-surface, #FFFFFF);
   border: 1px solid var(--border-light, #E2E8F0);
-  border-radius: var(--radius-lg, 16px);
+  border-radius: var(--radius-md, 12px);
   overflow: hidden;
   box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.05));
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -877,13 +877,13 @@ textarea.input-error {
 }
 
 .gallery-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-lg, 0 10px 25px rgba(0,0,0,0.1));
 }
 
 .gallery-img-wrap {
   position: relative;
-  aspect-ratio: 3 / 4;
+  height: 230px;
   overflow: hidden;
   background: #0F172A;
   display: flex;
@@ -918,10 +918,10 @@ textarea.input-error {
 }
 
 .gallery-zoom-icon {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   background: rgba(255, 255, 255, 0.9);
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -930,7 +930,7 @@ textarea.input-error {
 }
 
 .gallery-card-body {
-  padding: 1.2rem;
+  padding: 0.9rem 1rem 1rem;
 }
 
 .gallery-tag {
