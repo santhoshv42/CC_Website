@@ -3,6 +3,7 @@ import eventsData from '../data/events.js';
 
 export function initEvents() {
   const homeGrid = document.getElementById('homeTimingsGrid');
+  const aboutGrid = document.getElementById('aboutTimingsGrid');
   const fullGrid = document.getElementById('eventsFullList');
 
   if (!eventsData || !eventsData.length) return;
@@ -49,6 +50,10 @@ export function initEvents() {
 
   if (homeGrid) {
     homeGrid.innerHTML = eventsData.map(renderTimingCard).join('');
+  }
+
+  if (aboutGrid) {
+    aboutGrid.innerHTML = eventsData.map(renderTimingCard).join('');
   }
 
   if (fullGrid) {

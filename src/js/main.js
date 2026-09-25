@@ -346,7 +346,7 @@ function initNavigation() {
     if (targetView) {
       targetView.classList.add('active-view');
     } else {
-      document.getElementById('home-view')?.classList.add('active-view');
+      document.getElementById('about-view')?.classList.add('active-view');
     }
 
     // Update active navbar link
@@ -373,9 +373,9 @@ function initNavigation() {
         e.preventDefault();
         switchView(viewId);
         if (history.pushState) {
-          history.pushState(null, null, trigger.getAttribute('href') || '#home');
+          history.pushState(null, null, trigger.getAttribute('href') || '#about');
         } else {
-          window.location.hash = trigger.getAttribute('href') || '#home';
+          window.location.hash = trigger.getAttribute('href') || '#about';
         }
       }
     });
@@ -399,7 +399,7 @@ function initNavigation() {
         return;
       }
     }
-    switchView('home-view');
+    switchView('about-view');
   }
 
   window.addEventListener('hashchange', handleHashChange);
@@ -440,6 +440,7 @@ function initCopyHelper() {
 // Render Events and Service Timings
 function initEvents() {
   const homeGrid = document.getElementById('homeTimingsGrid');
+  const aboutGrid = document.getElementById('aboutTimingsGrid');
   const fullGrid = document.getElementById('eventsFullList');
 
   if (!eventsData || !eventsData.length) return;
@@ -494,6 +495,7 @@ function initEvents() {
   }
 
   if (homeGrid) homeGrid.innerHTML = eventsData.map(renderTimingCard).join('');
+  if (aboutGrid) aboutGrid.innerHTML = eventsData.map(renderTimingCard).join('');
   if (fullGrid) fullGrid.innerHTML = eventsData.map(renderTimingCard).join('');
 
   document.querySelectorAll('.timing-card-image').forEach(imgWrap => {
