@@ -11,7 +11,7 @@ export function initEvents() {
   function renderTimingCard(evt) {
     const imgHtml = evt.image ? `
       <div class="timing-card-image" data-title="${evt.title}" data-badge="${evt.badge || evt.category}">
-        <img src="${evt.image}" onerror="this.onerror=null; this.src='./public/assets/church_hero.png';" alt="${evt.title}">
+        <img src="${evt.image}" onerror="if (this.src.includes('/public/')) { this.src = this.src.replace('/public/', '/'); } else { this.src='./assets/church_hero.png'; }" alt="${evt.title}">
       </div>
     ` : '';
 
